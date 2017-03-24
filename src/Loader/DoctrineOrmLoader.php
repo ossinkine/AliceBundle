@@ -136,7 +136,7 @@ final class DoctrineOrmLoader implements AliceBundleLoaderInterface, LoggerAware
      * @param string[]                                $files
      * @param array                                   $parameters
      * @param bool                                    $append
-     * @param bool|null                               $purgeWithTruncate
+     * @param bool                                    $purgeWithTruncate
      *
      * @return \object[]
      */
@@ -147,14 +147,8 @@ final class DoctrineOrmLoader implements AliceBundleLoaderInterface, LoggerAware
         array $files,
         array $parameters,
         bool $append,
-        bool $purgeWithTruncate = null
+        bool $purgeWithTruncate
     ) {
-        if ($append && $purgeWithTruncate !== null) {
-            throw new \LogicException(
-                'Cannot append loaded fixtures and at the same time purge the database. Choose one.'
-            );
-        }
-
         $loader = $loader->withPersister(new ObjectManagerPersister($manager));
         if (true === $append) {
             return $loader->load($files, $parameters);
